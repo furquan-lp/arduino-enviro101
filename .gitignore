@@ -1,0 +1,11 @@
+# Ignore the tests archive
+test-archive/
+
+# Ignore zip files primarily because they tend to be related to
+# packaged things and we don't want to be tracking that
+*.zip
+
+# Ignore images
+*.png
+*.jpg
+*.gif
