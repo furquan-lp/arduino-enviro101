@@ -1,0 +1,20 @@
++--------------------+
+|Temperature: NaN *C |
+|Humidity: NaN       |
+|Air Quality: SAFE   |
+|NORMAL GAS CONC.    |
++--------------------+
+
++--------------------+
+|Temperature: NaN *C |
+|Humidity: NaN       |
+|AIR QUALITY WARNING!|
+|TOXIC LEVELS DETECTE|
++--------------------+
+
++--------------------+
+|Initializing Sensors|
+|Please wait...      |
+|                    |
+|                    |
++--------------------+
