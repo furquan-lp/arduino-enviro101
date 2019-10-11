@@ -6,7 +6,7 @@ Arduino prototype for analysing the environment and displaying the relevant data
 
 This repository contains the relevant code and the _Fritzing_ circuit file for the project. Please note that the circuit is not 100% accurate since I was unable to find a part for MQ135 with the breaker board (which I used).
 
-If you'd like to use the code please grab a [release](https://example.com/) file from here which contains only the sketch and the relevant libraries. You would need the libraries in the `lib` directory plus the [Adafruit Unified Sensor library](https://github.com/adafruit/Adafruit_Sensor). Everything else should work as expected.
+If you'd like to use the code please grab a [release](https://github.com/furquan-lp/arduino-enviro101/releases) file from here which contains only the sketch and the relevant libraries. You would need the libraries in the `lib` directory plus the [Adafruit Unified Sensor library](https://github.com/adafruit/Adafruit_Sensor). Everything else should work as expected.
 
 The code itself is mostly plain C and quite lightweight (excluding the libraries of course) written rather haphazardly but should be very legible otherwise.
 
