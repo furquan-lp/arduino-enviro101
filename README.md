@@ -9,9 +9,9 @@ This repository contains the relevant code and the _Fritzing_ circuit file for t
 If you'd like to use the code please grab a [release](https://github.com/furquan-lp/arduino-enviro101/releases) file from here which contains only the sketch. You would need the following libraries to make the code fully work:
 * [Adafruit Unified Sensor library](https://github.com/adafruit/Adafruit_Sensor). Everything else should work as expected.
 * The [DHT Sensor Library](https://github.com/adafruit/DHT-sensor-library) from Adafruit
-* An MQ135 Library (**TODO**)
+* [MQSensorslib](https://github.com/miguel5612/MQSensorsLib) by Miguel A. Califa U. et al.
 
-The code itself is mostly plain C and quite lightweight (excluding the libraries of course) written rather haphazardly but should be very legible otherwise.
+The code itself is mostly plain C and quite lightweight (excluding the libraries of course) written rather haphazardly but should be legible otherwise.
 
 ## Features:
 * Accurately calculates and displays the humidity and temperature using the _DHT22_ sensor
@@ -19,7 +19,7 @@ The code itself is mostly plain C and quite lightweight (excluding the libraries
 * Displays the above information on the 20x4 LCD display
 
 ## Wishlist:
-* Route the data to an ESP8266 NodeMCU module and send it to a webserver
+* Adapt the project to an ESP8266 NodeMCU module giving it (possible) Internet capability
 * Include a sleep mode so the assembly could run off batteries without power issues
 
 ## Legal:
@@ -30,4 +30,4 @@ distribute this software, either in source code form or as a compiled
 binary, for any purpose, commercial or non-commercial, and by any
 means. See the [LICENSE](LICENSE) for more information.
 
-All the free and open-source dependencies in the `lib` directory (including any that might be added in the future) are under the copyright of their respective owners.
+All the free and open-source dependencies in the (including any that might be added in the future) are under the copyright of their respective owners.
