@@ -2,7 +2,6 @@
 #include <LiquidCrystal.h>
 #include <DHT_U.h>
 #include <DHT.h>
-#include <MQ135.h>
 
 // defines
 
@@ -19,7 +18,7 @@ const int loadTime = 1; // <-- 1 to load instantly
 //SoftwareSerial s(5,6);
 LiquidCrystal lcd(7, 8, 9, 10, 11, 12);
 DHT dht = DHT(dataPin, DHTType);
-MQ135 gasSensor = MQ135(ANALOGPIN);
+//MQ135 gasSensor = MQ135(ANALOGPIN);
 
 // Initialize the special characters
 byte charS[] = {
