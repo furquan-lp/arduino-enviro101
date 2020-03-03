@@ -2,7 +2,7 @@
 #include <LiquidCrystal.h>
 #include <DHT_U.h>
 #include <DHT.h>
-// #include <MQ135.h> TODO: Search for an MQ135 library
+#include <MQ135.h>
 
 // defines
 
