@@ -43,10 +43,29 @@ void loop() {
 	blink_led(1000);
 }
 
+void display_temp() {
+	print_at("Temperature: ", 0);
+	printlcd(temperature());
+	printlcd((char) 223);
+	printlcd("C");
+}
+
+void display_humid() {
+	print_at("Humidity: ", 1);
+	printlcd(humidity());
+	printlcd("%");
+}
+
+void display_air(int mq) {
+	print_at("Air Quality: ", 2);
+	print_air_quality(mq);
+	print_at(get_warn_str(mq), 3);
+}
+
 void print_credits() {
-	printlcd("_Team");
+	print_home("_Team");
 	print_silicon();
-	printlcd(" Stomp_");
+	print_home(" Stomp_");
 	print_at("Sahil {SYED} Sandesh", 1);
 	print_at("Prem Subham & Saurav", 2);
 	print_at("    -*PRESENT*-     ", 3);

@@ -92,8 +92,19 @@ void clear_lcd() {
 }
 
 void printlcd(String s) {
-	lcd.home();
 	lcd.print(s);
+}
+
+void printlcd(int n) {
+	lcd.print(n);
+}
+
+void printlcd(float f) {
+	lcd.print(f);
+}
+
+void printlcd(char c) {
+	lcd.print(c);
 }
 
 void printlcd(String s[]) {
@@ -102,6 +113,11 @@ void printlcd(String s[]) {
 		lcd.setCursor(0, i);
 		lcd.print(s[i]);
 	}
+}
+
+void print_home(String s) {
+	lcd.home();
+	lcd.print(s);
 }
 
 void print_at(String s, int line) {
@@ -168,7 +184,7 @@ void print_air_quality(int q) {
 	}
 }
 
-void print_air_warn(int warn) {
+String get_warn_str(int warn) {
 	switch (warn) {
 		case 0:
 			lcd.print("Gases within limits ");
