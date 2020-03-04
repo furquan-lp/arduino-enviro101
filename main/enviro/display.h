@@ -16,6 +16,7 @@ void printlcd(String*);
 void print_home(String);
 void print_at(String, int);
 void print_at(String, int, int);
+void blink_cursor(bool);
 
 void print_spc_char(byte character[], int localeR, int localeC);
 void print_silicon(void);

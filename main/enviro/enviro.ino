@@ -45,14 +45,14 @@ void loop() {
 
 void display_temp() {
 	print_at("Temperature: ", 0);
-	printlcd(temperature());
+	printlcd(get_temp());
 	printlcd((char) 223);
 	printlcd("C");
 }
 
 void display_humid() {
 	print_at("Humidity: ", 1);
-	printlcd(humidity());
+	printlcd(get_humid());
 	printlcd("%");
 }
 

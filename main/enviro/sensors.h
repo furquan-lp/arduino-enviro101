@@ -10,5 +10,5 @@ int mq_read(void);
 int get_air_quality(float);
 int air_quality_warn(int);
 
-float humidity(void);
-float temperature(void);
+float get_humid(void);
+float get_temp(void);

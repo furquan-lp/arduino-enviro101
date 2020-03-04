@@ -136,6 +136,16 @@ void print_at(String s, int row, int col) {
     lcd.print(s);
 }
 
+void blink_cursor(bool b) {
+	if (b) {
+		lcd.cursor();
+		lcd.blink();
+	} else {
+		lcd.noBlink();
+		lcd.noCursor();
+	}
+}
+
 /*
  * Prints a special character on the 20x4 at the given row and column.
  * Please note that only a limited amount of special characters are
@@ -187,14 +197,13 @@ void print_air_quality(int q) {
 String get_warn_str(int warn) {
 	switch (warn) {
 		case 0:
-			lcd.print("Gases within limits ");
-			break;
+			return "Gases within limits ";
 		case 1:
-			lcd.print("Gases outside limits");
-			break;
+			return "Gases outside limits";
 		case -1:
-			lcd.print("SENSOR ERROR!");
-			break;
+			return "SENSOR ERROR!";
+		default:
+			return "PROGRAM FAULT";
 	}
 }
 

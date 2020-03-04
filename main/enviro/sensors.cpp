@@ -42,10 +42,10 @@ int air_quality_warn(int air_q) {
 	}
 }
 
-float humidity() {
+float get_humid() {
 	return dht.readHumidity();
 }
 
-float temperature() {
+float get_temp() {
 	return dht.readTemperature();
 }
