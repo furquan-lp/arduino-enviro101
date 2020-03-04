@@ -16,14 +16,14 @@
 |Temperature: NaN *C |
 |Humidity: NaN       |
 |Air Quality: SAFE   |
-|NORMAL GAS CONC.    |
+|Gases within limits |
 +--------------------+
 
 +--------------------+
 |Temperature: NaN *C |
 |Humidity: NaN       |
-|AIR QUALITY WARNING!|
-|TOXIC LEVELS DETECTE|
+|Air Quality: HAZARD |
+|Gases outside limits|
 +--------------------+
 
 +--------------------+
