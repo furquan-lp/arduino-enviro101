@@ -80,17 +80,6 @@ byte charN[] = {
   B11111
 };
 
-byte charPlug[] = {
-  B00000,
-  B00100,
-  B00110,
-  B01010,
-  B01001,
-  B10001,
-  B10001,
-  B01110
-};
-
 void init_lcd() {
 	lcd.begin(LCD_ROWS, LCD_COLS);
 	lcd.noDisplay();
@@ -105,6 +94,14 @@ void clear_lcd() {
 void printlcd(String s) {
 	lcd.home();
 	lcd.print(s);
+}
+
+void printlcd(String s[]) {
+	lcd.home();
+	for (int i = 0; i < 4; i++) {
+		lcd.setCursor(0, i);
+		lcd.print(s[i]);
+	}
 }
 
 void print_at(String s, int line) {
@@ -135,6 +132,16 @@ void print_spc_char(byte character[], int localeR, int localeC) {
   char_count++;
 }
 
+void print_silicon() {
+	print_spc_char(charS, 6, 0);
+	print_spc_char(charI, 7, 0);
+	print_spc_char(charL, 8, 0);
+	print_spc_char(charI, 9, 0);
+	print_spc_char(charC, 10, 0);
+	print_spc_char(charO, 11, 0);
+	print_spc_char(charN, 12, 0);
+}
+
 void print_air_quality(int q) {
 	switch (q) {
 		case 0:
@@ -144,7 +151,7 @@ void print_air_quality(int q) {
 			lcd.print("NORMAL");
 			break;
 		case 2:
-			lcd.print("STUFFED");
+			lcd.print("POOR");
 			break;
 		case 3:
 			lcd.print("UNSAFE");
@@ -179,6 +186,10 @@ void init_led() {
 	pinMode(LED, OUTPUT);
 }
 
+void init_led(int pin) {
+	pinMode(pin, OUTPUT);
+}
+
 void toggle_led() {
 	if (led_state == LOW) {
 		digitalWrite(LED, HIGH);
@@ -189,7 +200,7 @@ void toggle_led() {
 	}
 }
 
-void toggle_led(int n) {
+void toggle_led(bool n) {
 	if (n) {
 		digitalWrite(LED, HIGH);
 		led_state = HIGH;
@@ -199,11 +210,25 @@ void toggle_led(int n) {
 	}
 }
 
+void toggle_led(bool n, int pin) {
+	if (n)
+		digitalWrite(pin, HIGH);
+	else
+		digitalWrite(pin, LOW);
+}
+
 void blink_led(int ms) {
 	led_state = HIGH;
 	digitalWrite(LED, HIGH);
 	delay(ms / 2);
 	digitalWrite(LED, LOW);
 	led_state = LOW;
+	delay(ms / 2);
+}
+
+void blink_led(int ms, int pin) {
+	digitalWrite(pin, HIGH);
+	delay(ms / 2);
+	digitalWrite(pin, LOW);
 	delay(ms / 2);
 }

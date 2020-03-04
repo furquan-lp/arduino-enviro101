@@ -11,13 +11,24 @@ int mq_read() {
 /*
  * 0  Healthy
  * 1  Normal
- * 2  Stuffed (Moderate)
+ * 2  Poor (Moderate)
  * 3  Unsafe
  * 4  Hazard
  * -1 Unknown
  */
 int get_air_quality(float mp) {
-	return 0;
+	if (mp <= 250.0)
+		return 0;
+	else if (mp > 250.0 && mp <= 340.0)
+		return 1;
+	else if (mp > 340.0 && mp <= 400.0)
+		return 2;
+	else if (mp > 400.0 && mp <= 450.0)
+		return 3;
+	else if (mp > 450.0)
+		return 4;
+	else
+		return -1;
 }
 
 int air_quality_warn(int air_q) {
