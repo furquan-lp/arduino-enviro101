@@ -4,10 +4,80 @@
 #include "display.h"
 #include "sensors.h"
 
+// Globals:
 int pass = 0, mq_vals = 0;
+const int load_time = 5; // in seconds
+
+// The special symbols
+
+byte char_S[] = {
+  B01111,
+  B10000,
+  B10000,
+  B01110,
+  B00001,
+  B11110,
+  B00000,
+  B11111
+};
+
+byte char_I[] = {
+  B01110,
+  B00100,
+  B00100,
+  B00100,
+  B00100,
+  B01110,
+  B00000,
+  B11111
+};
+
+byte char_L[] = {
+  B10000,
+  B10000,
+  B10000,
+  B10000,
+  B10000,
+  B11111,
+  B00000,
+  B11111
+};
+
+byte char_C[] = {
+  B01110,
+  B10001,
+  B10000,
+  B10000,
+  B10001,
+  B01110,
+  B00000,
+  B11111
+};
+
+byte char_O[] = {
+  B01110,
+  B10001,
+  B10001,
+  B10001,
+  B10001,
+  B01110,
+  B00000,
+  B11111
+};
+
+byte char_N[] = {
+  B10001,
+  B11001,
+  B10101,
+  B10101,
+  B10011,
+  B10001,
+  B00000,
+  B11111
+};
 
 // The 'hourglass' wait symbol
-byte charExtra[] = {
+byte char_ext[] = {
   B11111,
   B10001,
   B01010,
@@ -19,64 +89,93 @@ byte charExtra[] = {
 };
 
 void setup() {
-	Serial.begin(9600);
+	//Serial.begin(9600);
 	init_led();
-	init_led(12);
+	toggle_led();
+	init_DHT();
+	//init_MQ();
+	init_lcd();
+	printlcd("Please wait...");
+	print_spc_char(char_ext, 15, 0);
+	print_at("Loading Sensors", 1);
+	delay(load_time * 1000); // load time for the sensors
+	toggle_led();
+	print_welcome();
+	delay(2500);
+	print_credits();
+	delay(1000);
+	clear_lcd();
+
+	/*print_credits();
+	delay(2500);
+	clear_lcd();
+	print_welcome();
+	delay(2500);
+	clear_lcd();
+	print_spc_char(char_ext, 19, 3);*/
 }
 
 void loop() {
-	if (pass == 0)
-		Serial.println("\t-- Begin --");
-	pass++;
-	if (pass % 60 == 0) {
-		Serial.print("\nAverage after 60000ms: ");
-		Serial.print(mq_vals / 60);
-		Serial.println("");
-		blink_led(2000, 12);
-		mq_vals = 0;
-	}
-	Serial.print("MQ135: ");
-	Serial.print(mq_read());
-	Serial.print("; Pass: ");
-	Serial.println(pass);
-	mq_vals += mq_read();
-	blink_led(1000);
+	//if (pass == 0)
+	//	printlcd("-- Begin --");
+	//pass++;
+	//print_at("Running: ", 1);
+	//printlcd(pass);
+	select_line(0);
+	display_temp();
+	printlcd(" & ");
+	display_humid();
+	select_line(1);
+	display_air(mq_read());
+	blink_led(50);
+	delay(1500);
 }
 
 void display_temp() {
-	print_at("Temperature: ", 0);
-	printlcd(get_temp());
+	printlcd((int) get_temp());
 	printlcd((char) 223);
 	printlcd("C");
 }
 
 void display_humid() {
-	print_at("Humidity: ", 1);
-	printlcd(get_humid());
-	printlcd("%");
+	printlcd((int) get_humid());
+	printlcd("% Humid");
 }
 
 void display_air(int mq) {
-	print_at("Air Quality: ", 2);
-	print_air_quality(mq);
-	print_at(get_warn_str(mq), 3);
+	printlcd("Air: "); // DEBUG
+	//print_air_quality(get_air_quality(mq_read()));
+	printlcd(mq_read());
+	printlcd("ppm");
+	//print_at(get_warn_str(mq), 3);
+}
+
+void print_silicon() {
+	print_spc_char(char_S, 0, 0);
+	print_spc_char(char_I, 1, 0);
+	print_spc_char(char_L, 2, 0);
+	print_spc_char(char_I, 3, 0);
+	print_spc_char(char_C, 4, 0);
+	print_spc_char(char_O, 5, 0);
+	print_spc_char(char_N, 6, 0);
 }
 
 void print_credits() {
-	print_home("_Team");
+	print_home("");
 	print_silicon();
-	print_home(" Stomp_");
-	print_at("Sahil {SYED} Sandesh", 1);
-	print_at("Prem Subham & Saurav", 2);
-	print_at("    -*PRESENT*-     ", 3);
+	printlcd(" *Stomp* ");
+	for (int i = 0; i < 2; i++) {
+		print_at("Sahil, {SYED},  ", 1);
+		delay(1000);
+		print_at(" Sandesh, Prem, ", 1);
+		delay(1000);
+		print_at(" Subham & Saurav", 1);
+		delay(1000);
+	}
+	print_at("Sahil, {SYED},  ", 1);
 }
 
 void print_welcome() {
-	String lines[] = {
-		" -/TESSERACT 2020\- ",
-		"   Air Quality &    ",
-		"Environment Analysis",
-		"      \MODEL/       "
-	};
-	printlcd(lines);
+	print_at("-TESSERACT 2020-", 0);
+	print_at("[ Air-Analysis ]", 1);
 }
