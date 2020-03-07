@@ -10,8 +10,8 @@
 #include "display.h"
 #ifdef LCD_I2C
 	#include <LiquidCrystal_I2C.h>
-	// set the LCD address to 0x27 for a 16 chars and 2 line display
-	LiquidCrystal_I2C lcd(0x27, 16, 2);
+	// set the LCD address to 0x27 (SDA: A4, SCL: A5)
+	LiquidCrystal_I2C lcd(0x27, LCD_ROWS, LCD_COLS);
 #else
 	#include <LiquidCrystal.h>
 	LiquidCrystal lcd(7, 8, 9, 10, 11, 12);
@@ -35,6 +35,10 @@ void init_lcd() {
 
 void clear_lcd() {
 	lcd.clear();
+}
+
+void select_line(int l) {
+	lcd.setCursor(0, l);
 }
 
 void printlcd(String s) {
@@ -108,6 +112,10 @@ void blink_cursor(int row, int col) {
 	lcd.blink();
 }
 
+/*
+ * Scrolls the printed text from the given offset in the given direction
+ * with the given delay between each character being scrolled
+ */
 void scroll_text(int offset, int dir, int ms) {
 	for (int i = 0; i < offset; i++) {
 		if (dir)
@@ -138,22 +146,22 @@ void print_air_quality(int q) {
 			lcd.print("HEALTHY");
 			break;
 		case 1:
-			lcd.print("NORMAL");
+			lcd.print("NORMAL ");
 			break;
 		case 2:
-			lcd.print("POOR");
+			lcd.print("POOR   ");
 			break;
 		case 3:
-			lcd.print("UNSAFE");
+			lcd.print("UNSAFE ");
 			break;
 		case 4:
-			lcd.print("HAZARD");
+			lcd.print("HAZARD ");
 			break;
 		case -1:
 			lcd.print("UNKNOWN");
 			break;
 		default:
-			lcd.print("ERROR");
+			lcd.print("ERROR  ");
 			break;
 	}
 }

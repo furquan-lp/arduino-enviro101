@@ -8,6 +8,7 @@
 
 void init_lcd(void);
 void clear_lcd(void);
+void select_line(int);
 void printlcd(String);
 void printlcd(int);
 void printlcd(float);
