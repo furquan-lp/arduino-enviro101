@@ -18,7 +18,7 @@
 #endif
 
 int char_count = 0; // Keep track of the number of special chars
-int led_state = LOW; // Keep track of the default LED state
+int led_state = LOW; // Keep track of the default-LED state
 
 void init_lcd() {
 #ifdef LCD_I2C
@@ -136,47 +136,6 @@ void print_spc_char(byte character[], int localeR, int localeC) {
   lcd.setCursor(localeR, localeC);
   lcd.write(byte(char_count));
   char_count++;
-}
-
-// Enviro-specific display functions
-
-void print_air_quality(int q) {
-	switch (q) {
-		case 0:
-			lcd.print("HEALTHY");
-			break;
-		case 1:
-			lcd.print("NORMAL ");
-			break;
-		case 2:
-			lcd.print("POOR   ");
-			break;
-		case 3:
-			lcd.print("UNSAFE ");
-			break;
-		case 4:
-			lcd.print("HAZARD ");
-			break;
-		case -1:
-			lcd.print("UNKNOWN");
-			break;
-		default:
-			lcd.print("ERROR  ");
-			break;
-	}
-}
-
-String get_warn_str(int warn) {
-	switch (warn) {
-		case 0:
-			return "Gases within limits ";
-		case 1:
-			return "Gases outside limits";
-		case -1:
-			return "SENSOR ERROR!";
-		default:
-			return "PROGRAM FAULT";
-	}
 }
 
 // LED-control functions
