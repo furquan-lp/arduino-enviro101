@@ -20,72 +20,6 @@
 int char_count = 0; // Keep track of the number of special chars
 int led_state = LOW; // Keep track of the default LED state
 
-byte char_S[] = {
-  B01111,
-  B10000,
-  B10000,
-  B01110,
-  B00001,
-  B11110,
-  B00000,
-  B11111
-};
-
-byte char_I[] = {
-  B01110,
-  B00100,
-  B00100,
-  B00100,
-  B00100,
-  B01110,
-  B00000,
-  B11111
-};
-
-byte char_L[] = {
-  B10000,
-  B10000,
-  B10000,
-  B10000,
-  B10000,
-  B11111,
-  B00000,
-  B11111
-};
-
-byte char_C[] = {
-  B01110,
-  B10001,
-  B10000,
-  B10000,
-  B10001,
-  B01110,
-  B00000,
-  B11111
-};
-
-byte char_O[] = {
-  B01110,
-  B10001,
-  B10001,
-  B10001,
-  B10001,
-  B01110,
-  B00000,
-  B11111
-};
-
-byte char_N[] = {
-  B10001,
-  B11001,
-  B10101,
-  B10101,
-  B10011,
-  B10001,
-  B00000,
-  B11111
-};
-
 void init_lcd() {
 #ifdef LCD_I2C
 	lcd.init();
@@ -149,7 +83,8 @@ void print_at(String s, int row, int col) {
 }
 
 /*
- * Places a blinking cursor at the current cursor locale in the LCD
+ * Places a blinking cursor at the current cursor locale in the LCD.
+ * Removes the cursor if false.
  */
 void blink_cursor(bool b) {
 	if (b) {
@@ -158,6 +93,28 @@ void blink_cursor(bool b) {
 	} else {
 		lcd.noBlink();
 		lcd.noCursor();
+	}
+}
+
+/*
+ * Moves the cursor to the given locale in the LCD and then places a
+ * blinking cursor there.
+ */
+void blink_cursor(int row, int col) {
+	if (row > LCD_ROWS || col > LCD_COLS)
+		return;
+	lcd.setCursor(row, col);
+	lcd.cursor();
+	lcd.blink();
+}
+
+void scroll_text(int offset, int dir, int ms) {
+	for (int i = 0; i < offset; i++) {
+		if (dir)
+			lcd.scrollDisplayLeft();
+		else
+			lcd.scrollDisplayRight();
+		delay(ms);
 	}
 }
 
@@ -174,16 +131,6 @@ void print_spc_char(byte character[], int localeR, int localeC) {
 }
 
 // Enviro-specific display functions
-
-void print_silicon() {
-	print_spc_char(char_S, 6, 0);
-	print_spc_char(char_I, 7, 0);
-	print_spc_char(char_L, 8, 0);
-	print_spc_char(char_I, 9, 0);
-	print_spc_char(char_C, 10, 0);
-	print_spc_char(char_O, 11, 0);
-	print_spc_char(char_N, 12, 0);
-}
 
 void print_air_quality(int q) {
 	switch (q) {

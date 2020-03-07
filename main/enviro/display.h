@@ -17,6 +17,8 @@ void print_home(String);
 void print_at(String, int);
 void print_at(String, int, int);
 void blink_cursor(bool);
+void blink_cursor(int, int);
+void scroll_text(int, int, int);
 
 void print_spc_char(byte character[], int localeR, int localeC);
 void print_silicon(void);
