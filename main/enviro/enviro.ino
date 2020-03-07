@@ -131,6 +131,47 @@ void loop() {
 	delay(1500);
 }
 
+// Enviro-specific display functions
+
+void print_air_quality(int q) {
+	switch (q) {
+		case 0:
+			printlcd("HEALTHY");
+			break;
+		case 1:
+			printlcd("NORMAL ");
+			break;
+		case 2:
+			printlcd("POOR   ");
+			break;
+		case 3:
+			printlcd("UNSAFE ");
+			break;
+		case 4:
+			printlcd("HAZARD ");
+			break;
+		case -1:
+			printlcd("UNKNOWN");
+			break;
+		default:
+			printlcd("ERROR  ");
+			break;
+	}
+}
+
+String get_warn_str(int warn) {
+	switch (warn) {
+		case 0:
+			return "Gases within limits ";
+		case 1:
+			return "Gases outside limits";
+		case -1:
+			return "SENSOR ERROR!";
+		default:
+			return "PROGRAM FAULT";
+	}
+}
+
 void display_temp() {
 	printlcd((int) get_temp());
 	printlcd((char) 223);
