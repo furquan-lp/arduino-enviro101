@@ -1,11 +1,22 @@
 #include "sensors.h"
 
 DHT dht = DHT(DHT_DATA, DHTType);
+
+int analog_pin = 0;
+
 //MQ135 gasSensor = MQ135(ANALOGPIN);
 //MQUnifiedsensor MQ135(pin, type);
 
+void init_DHT() {
+	dht.begin();
+}
+
+void init_MQ() {
+	analog_pin = MQ_ANALOG;
+}
+
 int mq_read() {
-	return analogRead(MQ_ANALOG);
+	return analogRead(analog_pin);
 }
 
 /*
@@ -17,9 +28,9 @@ int mq_read() {
  * -1 Unknown
  */
 int get_air_quality(float mp) {
-	if (mp <= 250.0)
+	if (mp <= 280.0)
 		return 0;
-	else if (mp > 250.0 && mp <= 340.0)
+	else if (mp > 280.0 && mp <= 340.0)
 		return 1;
 	else if (mp > 340.0 && mp <= 400.0)
 		return 2;

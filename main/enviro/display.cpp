@@ -8,13 +8,19 @@
  */
 
 #include "display.h"
-
-LiquidCrystal lcd(7, 8, 9, 10, 11, 12);
+#ifdef LCD_I2C
+	#include <LiquidCrystal_I2C.h>
+	// set the LCD address to 0x27 for a 16 chars and 2 line display
+	LiquidCrystal_I2C lcd(0x27, 16, 2);
+#else
+	#include <LiquidCrystal.h>
+	LiquidCrystal lcd(7, 8, 9, 10, 11, 12);
+#endif
 
 int char_count = 0; // Keep track of the number of special chars
-int led_state = LOW;
+int led_state = LOW; // Keep track of the default LED state
 
-byte charS[] = {
+byte char_S[] = {
   B01111,
   B10000,
   B10000,
@@ -25,7 +31,7 @@ byte charS[] = {
   B11111
 };
 
-byte charI[] = {
+byte char_I[] = {
   B01110,
   B00100,
   B00100,
@@ -36,7 +42,7 @@ byte charI[] = {
   B11111
 };
 
-byte charL[] = {
+byte char_L[] = {
   B10000,
   B10000,
   B10000,
@@ -47,7 +53,7 @@ byte charL[] = {
   B11111
 };
 
-byte charC[] = {
+byte char_C[] = {
   B01110,
   B10001,
   B10000,
@@ -58,7 +64,7 @@ byte charC[] = {
   B11111
 };
 
-byte charO[] = {
+byte char_O[] = {
   B01110,
   B10001,
   B10001,
@@ -69,7 +75,7 @@ byte charO[] = {
   B11111
 };
 
-byte charN[] = {
+byte char_N[] = {
   B10001,
   B11001,
   B10101,
@@ -81,7 +87,13 @@ byte charN[] = {
 };
 
 void init_lcd() {
+#ifdef LCD_I2C
+	lcd.init();
+	lcd.backlight();
+#else
 	lcd.begin(LCD_ROWS, LCD_COLS);
+#endif
+	lcd.setCursor(0, 0);
 	lcd.noDisplay();
 	delay(100);
 	lcd.display();
@@ -136,6 +148,9 @@ void print_at(String s, int row, int col) {
     lcd.print(s);
 }
 
+/*
+ * Places a blinking cursor at the current cursor locale in the LCD
+ */
 void blink_cursor(bool b) {
 	if (b) {
 		lcd.cursor();
@@ -158,14 +173,16 @@ void print_spc_char(byte character[], int localeR, int localeC) {
   char_count++;
 }
 
+// Enviro-specific display functions
+
 void print_silicon() {
-	print_spc_char(charS, 6, 0);
-	print_spc_char(charI, 7, 0);
-	print_spc_char(charL, 8, 0);
-	print_spc_char(charI, 9, 0);
-	print_spc_char(charC, 10, 0);
-	print_spc_char(charO, 11, 0);
-	print_spc_char(charN, 12, 0);
+	print_spc_char(char_S, 6, 0);
+	print_spc_char(char_I, 7, 0);
+	print_spc_char(char_L, 8, 0);
+	print_spc_char(char_I, 9, 0);
+	print_spc_char(char_C, 10, 0);
+	print_spc_char(char_O, 11, 0);
+	print_spc_char(char_N, 12, 0);
 }
 
 void print_air_quality(int q) {
@@ -206,6 +223,8 @@ String get_warn_str(int warn) {
 			return "PROGRAM FAULT";
 	}
 }
+
+// LED-control functions
 
 void init_led() {
 	pinMode(LED, OUTPUT);

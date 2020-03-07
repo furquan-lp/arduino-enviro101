@@ -6,6 +6,9 @@
 #define DHTType DHT22
 #define MQ_ANALOG 0
 
+void init_DHT(void);
+void init_MQ(void);
+
 int mq_read(void);
 int get_air_quality(float);
 int air_quality_warn(int);

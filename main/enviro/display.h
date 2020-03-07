@@ -1,10 +1,10 @@
-#include <LiquidCrystal.h>
 #include <Arduino.h>
 #include <Wire.h>
 
 #define LED LED_BUILTIN
-#define LCD_ROWS 24
-#define LCD_COLS 4
+#define LCD_ROWS 16
+#define LCD_COLS 2
+#define LCD_I2C
 
 void init_lcd(void);
 void clear_lcd(void);
