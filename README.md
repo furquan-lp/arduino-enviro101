@@ -2,7 +2,6 @@
 Arduino prototype for analysing the environment and displaying the relevant data on an LCD
 
 [![](https://img.shields.io/github/v/release/furquan-lp/arduino-enviro101?include_prereleases&style=flat-square)](https://github.com/furquan-lp/arduino-enviro101/releases) ![](https://img.shields.io/github/release-date-pre/furquan-lp/arduino-enviro101?style=flat-square) [![](https://img.shields.io/badge/license-public%20domain-blue?style=flat-square)](LICENSE)
-![](project.jpg)
 
 This repository contains the relevant code and the _Fritzing_ circuit file for the project. Please note that the circuit is not 100% accurate since I was unable to find a part for MQ135 with the breaker board (which I used).
 
@@ -11,6 +10,13 @@ If you'd like to use the code please grab a [release](https://github.com/furquan
 * The [DHT Sensor Library](https://github.com/adafruit/DHT-sensor-library) from Adafruit
 
 The code itself is mostly plain C and quite lightweight and should be quite legible.
+
+## Screenshots:
+With the (default) 16x2 LCD:
+![](screenshots/2.jpg)
+
+With a 20x4 blue LCD (old version):
+![](screenshots/1.jpg)
 
 ## Features:
 * Accurately calculates and displays the humidity and temperature using the _DHT22_ sensor
