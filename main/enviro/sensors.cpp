@@ -30,13 +30,13 @@ int mq_read() {
 int get_air_quality(float mp) {
 	if (mp <= 280.0)
 		return 0;
-	else if (mp > 280.0 && mp <= 340.0)
+	else if (mp > 280.0 && mp <= 360.0)
 		return 1;
-	else if (mp > 340.0 && mp <= 400.0)
+	else if (mp > 360.0 && mp <= 420.0)
 		return 2;
-	else if (mp > 400.0 && mp <= 450.0)
+	else if (mp > 420.0 && mp <= 480.0)
 		return 3;
-	else if (mp > 450.0)
+	else if (mp > 480.0)
 		return 4;
 	else
 		return -1;
