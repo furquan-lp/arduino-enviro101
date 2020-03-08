@@ -1,11 +1,17 @@
-//#include <Arduino.h>
-//#include <Wire.h>
+/*
+ * This is free and unencumbered software released into the public domain.
+ *
+ * Anyone is free to copy, modify, publish, use, compile, sell, or
+ * distribute this software, either in source code form or as a compiled
+ * binary, for any purpose, commercial or non-commercial, and by any
+ * means. See the LICENSE for more information.
+ */
 
 #include "display.h"
 #include "sensors.h"
 
 // Globals:
-int pass = 0, mq_vals = 0;
+int pass = 0;
 const int load_time = 5; // in seconds
 
 // The special symbols
@@ -105,25 +111,13 @@ void setup() {
 	print_credits();
 	delay(1000);
 	clear_lcd();
-
-	/*print_credits();
-	delay(2500);
-	clear_lcd();
-	print_welcome();
-	delay(2500);
-	clear_lcd();
-	print_spc_char(char_ext, 19, 3);*/
 }
 
 void loop() {
-	//if (pass == 0)
-	//	printlcd("-- Begin --");
-	//pass++;
-	//print_at("Running: ", 1);
-	//printlcd(pass);
+	pass++;
 	select_line(0);
 	display_temp();
-	printlcd(" & ");
+	printlcd(" ");
 	display_humid();
 	select_line(1);
 	display_air(mq_read());
@@ -139,22 +133,22 @@ void print_air_quality(int q) {
 			printlcd("HEALTHY");
 			break;
 		case 1:
-			printlcd("NORMAL ");
+			printlcd("NORMAL");
 			break;
 		case 2:
-			printlcd("POOR   ");
+			printlcd("POOR");
 			break;
 		case 3:
-			printlcd("UNSAFE ");
+			printlcd("UNSAFE");
 			break;
 		case 4:
-			printlcd("HAZARD ");
+			printlcd("HAZARD");
 			break;
 		case -1:
 			printlcd("UNKNOWN");
 			break;
 		default:
-			printlcd("ERROR  ");
+			printlcd("ERROR");
 			break;
 	}
 }
@@ -173,7 +167,7 @@ String get_warn_str(int warn) {
 }
 
 void display_temp() {
-	printlcd((int) get_temp());
+	printlcd(get_temp());
 	printlcd((char) 223);
 	printlcd("C");
 }
@@ -202,17 +196,15 @@ void print_silicon() {
 }
 
 void print_credits() {
-	print_home("");
+	select_line(0);
 	print_silicon();
 	printlcd(" *Stomp* ");
-	for (int i = 0; i < 2; i++) {
-		print_at("Sahil, {SYED},  ", 1);
-		delay(1000);
-		print_at(" Sandesh, Prem, ", 1);
-		delay(1000);
-		print_at(" Subham & Saurav", 1);
-		delay(1000);
-	}
+	print_at("Sahil, {SYED},  ", 1);
+	delay(2000);
+	print_at(" Sandesh, Prem, ", 1);
+	delay(1000);
+	print_at("Subham & Saurav", 1);
+	delay(1000);
 	print_at("Sahil, {SYED},  ", 1);
 }
 
