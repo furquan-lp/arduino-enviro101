@@ -1,3 +1,12 @@
+/*
+ * This is free and unencumbered software released into the public domain.
+ *
+ * Anyone is free to copy, modify, publish, use, compile, sell, or
+ * distribute this software, either in source code form or as a compiled
+ * binary, for any purpose, commercial or non-commercial, and by any
+ * means. See the LICENSE for more information.
+ */
+
 #include <Arduino.h>
 #include <Wire.h>
 
@@ -14,14 +23,13 @@ void printlcd(int);
 void printlcd(float);
 void printlcd(char);
 void printlcd(String*);
+void println_lcd(String);
 void print_spc_char(byte*, int, int);
-void print_home(String);
 void print_at(String, int);
 void print_at(String, int, int);
 void blink_cursor(bool);
 void blink_cursor(int, int);
 void scroll_text(int, int, int);
-
 
 void init_led(void);
 void init_led(int);

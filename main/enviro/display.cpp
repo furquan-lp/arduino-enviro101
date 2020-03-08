@@ -65,9 +65,15 @@ void printlcd(String s[]) {
 	}
 }
 
-void print_home(String s) {
-	lcd.home();
-	lcd.print(s);
+void println_lcd(String s) {
+	if (s.length() > LCD_COLS) {
+		lcd.print(s.substring(0, LCD_COLS - 1));
+	} else {
+		lcd.print(s);
+		for (int i = s.length(); i < LCD_COLS; i++) {
+			lcd.print(" ");
+		}
+	}
 }
 
 void print_at(String s, int line) {
