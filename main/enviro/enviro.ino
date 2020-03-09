@@ -12,7 +12,7 @@
 
 // Globals:
 int pass = 0;
-const int load_time = 5; // in seconds
+const int load_time = 1; // in seconds
 
 // The special symbols
 
@@ -99,7 +99,7 @@ void setup() {
 	init_led();
 	toggle_led();
 	init_DHT();
-	//init_MQ();
+	init_MQ();
 	init_lcd();
 	printlcd("Please wait...");
 	print_spc_char(char_ext, 15, 0);
@@ -167,12 +167,13 @@ String get_warn_str(int warn) {
 }
 
 void display_temp() {
-	printlcd(get_temp());
+	printlcd((int) get_temp());
 	printlcd((char) 223);
 	printlcd("C");
 }
 
 void display_humid() {
+	printlcd("  ");
 	printlcd((int) get_humid());
 	printlcd("% Humid");
 }
