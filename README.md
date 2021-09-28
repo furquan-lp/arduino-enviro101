@@ -9,7 +9,7 @@ If you'd like to use the code please grab a [release](https://github.com/furquan
 * [Adafruit Unified Sensor library](https://github.com/adafruit/Adafruit_Sensor). Everything else should work as expected.
 * The [DHT Sensor Library](https://github.com/adafruit/DHT-sensor-library) from Adafruit
 
-The code itself is mostly plain C and quite lightweight and should be quite legible.
+The code itself is mostly plain C/C++ and quite lightweight and should be quite legible.
 
 ## Screenshots:
 With the (default) 16x2 LCD:
@@ -23,9 +23,11 @@ With a 20x4 blue LCD (old version):
 * Inputs gas information from the MQ135 and attempts to interpret the air quality 
 * Displays the above information on the 20x4 LCD display
 
+## Under test:
+* Fully adapt the project to an ESP8266 NodeMCU module giving it (possible) Internet capability
+
 ## Wishlist:
 * Adjust the MQ135 sensor to have fewer jumps in output values
-* Adapt the project to an ESP8266 NodeMCU module giving it (possible) Internet capability
 * Include a sleep mode so the assembly could run off batteries without power issues
 
 ## Legal:
