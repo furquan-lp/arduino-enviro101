@@ -23,12 +23,10 @@ With a 20x4 blue LCD (old version):
 * Inputs gas information from the MQ135 and attempts to interpret the air quality 
 * Displays the above information on the 20x4 LCD display
 
-## Under test:
-* Fully adapt the project to an ESP8266 NodeMCU module giving it (possible) Internet capability
-
 ## Wishlist:
 * Adjust the MQ135 sensor to have fewer jumps in output values
 * Include a sleep mode so the assembly could run off batteries without power issues
+* Fully adapt the project to an ESP8266 NodeMCU module giving it (possible) Internet capability (**Moved to** https://github.com/furquan-lp/environment-monitor)
 
 ## Legal:
 This is free and unencumbered software released into the public domain.
